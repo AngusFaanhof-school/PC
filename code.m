@@ -19,7 +19,10 @@ while(1)
     if (distance < 0.2)
         stop(leftMotor);
         stop(rightMotor);
-        command = input("what?", 's'); % Process the image
+        [v, ~, ~] = takeImageAndGetVect;
+        y = net(v);
+        command = getDirectionFromVect(y);
+        %command = input("what?", 's'); % Process the image
     end
 
     if (command == "n")
