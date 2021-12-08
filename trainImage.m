@@ -1,11 +1,11 @@
-testData  = csvread('testIm1.csv');
-trainData  = csvread('trainIm1.csv');
+testData  = csvread('testImages.csv');
+trainData  = csvread('trainImages.csv');
 
-for k=1:70
+for k=1:192
     j = testData(1:end, k);
     length(j)
     digit = reshape(j,[28,28]);
-    subplot(7,10,k)
+    subplot(16,12,k)
     imshow(digit);
 end
 
