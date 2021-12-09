@@ -1,11 +1,11 @@
 function [direction] = getDirectionFromVect(vect)
     [~, index] = max(vect);
-    direction = "m";
+    direction = "g";
     
     if index == 3
         direction = "r";
     elseif index == 2
-        direction = "s";
+        direction = "g";
     elseif index == 1
         direction = "l";
     end

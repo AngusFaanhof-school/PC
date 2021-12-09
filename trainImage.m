@@ -3,9 +3,9 @@ trainData  = csvread('trainImages.csv');
 
 for k=1:192
     j = testData(1:end, k);
-    length(j)
+    length(j);
     digit = reshape(j,[28,28]);
-    subplot(16,12,k)
+    subplot(16,12,k);
     imshow(digit);
 end
 
@@ -32,7 +32,7 @@ yind = vec2ind(y);
 percentErrors = sum(tind ~= yind)/numel(tind);
 
 % View the Network
-view(net)
+view(net);
 
 % Plots
 % Uncomment these lines to enable various plots.

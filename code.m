@@ -1,9 +1,10 @@
 vid = videoinput('winvideo',1);
+start(vid);
 
-robot = legoev3('usb');
+%robot = legoev3('usb');
 
 leftMotor = motor(robot, 'A');
-rightMotor = motor(robot, 'B');
+rightMotor = motor(robot, 'C');
 
 sonar = sonicSensor(robot);
 
@@ -13,32 +14,39 @@ rightMotor.Speed = moveSpeed;
 
 start(leftMotor);
 start(rightMotor);
-
 while(1)
     distance = readDistance(sonar);
-
-    command = "n";
+    
+    command = "g";
+    
     if (distance < 0.2)
         stop(leftMotor);
         stop(rightMotor);
-        [v, ~, ~] = takeImageAndGetVect(vid);
+        pause(1);
+        [v, ~, f, im] = takeImageAndGetVect(vid);
+        imshow(f);
         y = net(v);
         command = getDirectionFromVect(y);
-        %command = input("what?", 's'); % Process the image
+        %d = input("Should we move " + command + " ?", 's');
+        %if d == "n"
+        %    continue;
+        %end
+        disp(y);
     end
-
-    if (command == "n")
+    
+    if (command == "g")
         start(leftMotor);
         start(rightMotor);
+        pause(0.01);
     elseif (command == "l")
         stop(leftMotor);
         start(rightMotor);
         pause(1.63);
+        stop(rightMotor);
     elseif (command == "r")
         start(leftMotor);
         stop(rightMotor);
         pause(1.63);
-    else
-        pause(0.01);
+        stop(leftMotor);
     end
 end
