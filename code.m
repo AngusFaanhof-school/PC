@@ -1,3 +1,5 @@
+vid = videoinput('winvideo',1);
+
 robot = legoev3('usb');
 
 leftMotor = motor(robot, 'A');
@@ -19,7 +21,7 @@ while(1)
     if (distance < 0.2)
         stop(leftMotor);
         stop(rightMotor);
-        [v, ~, ~] = takeImageAndGetVect;
+        [v, ~, ~] = takeImageAndGetVect(vid);
         y = net(v);
         command = getDirectionFromVect(y);
         %command = input("what?", 's'); % Process the image

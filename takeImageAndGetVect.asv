@@ -1,4 +1,4 @@
-function [vect, bw, final, im] = takeImageAndGetVect(vid)
+function [vect, bw, final] = takeImageAndGetVect(vid)
     % take image
     start(vid);
     im = getsnapshot(vid);
@@ -17,6 +17,6 @@ function [vect, bw, final, im] = takeImageAndGetVect(vid)
     vect = resizeimage(:);
     bw = bwimage;
     final = resizeimage;
-    imshow(openimage);
+    imshow(
 end
 
