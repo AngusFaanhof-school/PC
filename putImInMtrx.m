@@ -1,7 +1,9 @@
+%Get .png image from folder
 Files = dir('*.png');
 testFile = [];
 trainFile = [];
 
+%Convert all images into matrix
 for k=1:length(Files)
     Filename = Files(k).name;
     im = imread(Filename); 
@@ -15,6 +17,7 @@ for k=1:length(Files)
     trainFile = [trainFile output];
 end
 
+%Write the matrix into csv file
 writematrix(testFile, 'testHandIm.csv');
 writematrix(trainFile, 'trainHandIm.csv');
 

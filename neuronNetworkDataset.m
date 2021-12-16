@@ -1,38 +1,33 @@
+%Load dataset
 x  = csvread('testImages.csv');
 t  = csvread('trainImages.csv');
 
-trainFcn = 'trainscg';  % Scaled conjugate gradient backpropagation.
+%Train network via scaled conjugate gradient backpropagation.
+trainFcn = 'trainscg';  
 
-% Create a Pattern Recognition Network
+%Create a Pattern Recognition Network with 100 hidden layers
 hiddenLayerSize = 100;
 net = patternnet(hiddenLayerSize, trainFcn);
 
-% Setup Division of Data for Training, Validation, Testing
+%Setup Division of Data for Training, Validation, Testing
 net.divideParam.trainRatio = 70/100;
 net.divideParam.valRatio = 15/100;
 net.divideParam.testRatio = 15/100;
 
-% Train the Network
+%Train the Network
 [net,tr] = train(net,x,t);
 
-% Test the Network
+%Test the Network
 y = net(x);
 e = gsubtract(t,y);
-%performance = perform(net,t,y)
-tind = vec2ind(t);
-yind = vec2ind(y);
-percentErrors = sum(tind ~= yind)/numel(tind);
 
-% View the Network
+%Calculate network performance
+performance = perform(net,t,y)
+
+%View the Network
 view(net)
 
-% Plots
-% Uncomment these lines to enable various plots.
-%figure, plotperform(tr)
-%figure, plottrainstate(tr)
-%figure, ploterrhist(e)
-%figure, plotconfusion(t,y)
-%figure, plotroc(t,y)
+%Save the traned neural network
 netSave = net
 filename = 'trainNN';
 save(filename, 'netSave')
