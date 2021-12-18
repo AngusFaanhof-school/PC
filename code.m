@@ -1,11 +1,11 @@
-% Define and start the video stream
-vid = videoinput('winvideo',1);
-start(vid);
-
 % Load the trained neural network
 net = load("trainNN.mat");
 
-% Define the robot objects
+% Define and start the video stream
+vid = videoinput('winvideo', 1);
+start(vid);
+
+% Define the robot and objects
 robot = legoev3('usb');
 leftMotor = motor(robot, 'A');
 rightMotor = motor(robot, 'B');
@@ -17,24 +17,23 @@ leftMotor.Speed = moveSpeed;
 rightMotor.Speed = moveSpeed;
 
 while(1)
+    % Drive forward by default
+    start(leftMotor);
+    start(rightMotor);
+    command = "g";
+
     % Read distance in front
     distance = readDistance(sonar);
 
-    % Drive by default
-    start(leftMotor);
-    start(rightMotor);
-
-     % Go by default
-    command = "g";
-
     if (distance < 0.2)
+        % Stop if the distance is too small
         stop(leftMotor);
         stop(rightMotor);
 
-        % Wait so we can get in position
+        % Wait to get into position
         pause(1);
 
-        % Take the image
+        % Take the image and get the image vector
         imageVector =  takeImageAndGetVect(vid);
 
         % Get the resultVector from the neural network
@@ -46,7 +45,7 @@ while(1)
 
 
     if (command == "g")
-        % Continue but wait 10 ms
+        % Continue after 10 ms
         pause(0.01);
     elseif (command == "l")
         % Hard coded left turn
