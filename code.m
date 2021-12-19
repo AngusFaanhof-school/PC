@@ -43,7 +43,6 @@ while(1)
         command = getCommandFromVector(resultVector);
     end
 
-
     if (command == "g")
         % Continue after 10 ms
         pause(0.01);
