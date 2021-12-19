@@ -34,7 +34,7 @@ while(1)
         pause(1);
 
         % Take the image and get the image vector
-        imageVector =  takeImageAndGetVect(vid);
+        [imageVector, ~] =  takeImageAndGetVect(vid);
 
         % Get the resultVector from the neural network
         resultVector = net(imageVector);

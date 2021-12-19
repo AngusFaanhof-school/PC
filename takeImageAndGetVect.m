@@ -1,4 +1,4 @@
-function [vect] = takeImageAndGetVect(vid)
+function [vect, resizeIm] = takeImageAndGetVect(vid)
     % Take image
     im = getsnapshot(vid);
 

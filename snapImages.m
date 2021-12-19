@@ -11,7 +11,7 @@ while loop == 1
 
     type = input("Label (l, r, h), or q to quit: ", 's');
 
-    image = getsnapshot(vid);
+    [~, image] = takeImageAndGetVect(vid);
     imshow(image);
 
     if type == "l"
