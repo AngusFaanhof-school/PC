@@ -8,21 +8,21 @@ preview(vid);
 
 loop = 1;
 while loop == 1
-    
-    type = input("Label (l, r, h), or q to quit: ", 's');
-    
-    [v, ~, f, ~] = takeImageAndGetVect(vid);
-    imshow(f);    
 
-    if type == "l" 
+    type = input("Label (l, r, h), or q to quit: ", 's');
+
+    image = getsnapshot(vid);
+    imshow(image);
+
+    if type == "l"
         leftIndex = leftIndex + 1;
-        imwrite(f, "samples/" + type + leftIndex + ".png");
-    elseif type == "r" 
+        imwrite(image, "samples/" + type + leftIndex + ".png");
+    elseif type == "r"
         rightIndex = rightIndex + 1;
-        imwrite(f, "samples/" + type + rightIndex + ".png");
+        imwrite(image, "samples/" + type + rightIndex + ".png");
     elseif type == "h"
-        haltIndex = haltIndex + 1; 
-        imwrite(f, "samples/" + type + haltIndex + ".png");
+        haltIndex = haltIndex + 1;
+        imwrite(image, "samples/" + type + haltIndex + ".png");
     elseif type == "q"
         loop = 0;
     elseif type ~= "s"
